@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('order_forms', function (Blueprint $table) {
             $table->id();
             $table->string('orders');
-            $table->int('factory_id');
-            $table->int('company_id');
+            $table->unsignedBigInteger('factory_id');
+            $table->unsignedBigInteger('company_id');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 

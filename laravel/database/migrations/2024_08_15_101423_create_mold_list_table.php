@@ -19,12 +19,14 @@ return new class extends Migration
             $table->string('price');
             $table->string('factory');
             $table->string('factory_price');
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('description');
             $table->enum('status',['normal','deleted','archived_add','arciheved_remove']);
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');
         });
     }
 

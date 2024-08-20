@@ -13,29 +13,28 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->int('main_category');
-            $table->int('sub_category');
+            $table->unsignedBigInteger('main_category');
+            $table->unsignedBigInteger('sub_category');
             $table->string('code')->nullable();
             $table->string('name');
-            $table->int('quantity')->nullable();
-            $table->int('pallet_quantity')->nullable();
-            $table->int('warehouse_quantity')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->integer('pallet_quantity')->nullable();
+            $table->integer('warehouse_quantity')->nullable();
             $table->string('shelf')->nullable();
             $table->float('unit_kg')->nullable();
             $table->string('length')->nullable();
             $table->float('cost_price')->nullable();
             $table->float('selling_price')->nullable();
-            $table->int('factory_id')->nullable();
+            $table->unsignedBigInteger('factory_id')->nullable();
             $table->text('description')->nullable();
             $table->float('stock_quantity')->nullable();
             $table->float('alert_quantity')->nullable();
             $table->float('warehouse_alert_quantity')->nullable();
-            $table->int('order')->nullable();
+            $table->integer('order')->nullable();
             $table->string('customer_name')->nullable();
             $table->date('date')->nullable();
             $table->date('due_date')->nullable();
-            $table->float('selling_price')->nullable();
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('main_category')->references('id')->on('categories')->onDelete('restrict');

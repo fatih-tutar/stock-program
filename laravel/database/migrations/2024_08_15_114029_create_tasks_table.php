@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('is_repeating');
             $table->boolean('is_completed')->default(false);
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');

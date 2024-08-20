@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('address');
             $table->double('amount_due');
             $table->date('due_date');
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');

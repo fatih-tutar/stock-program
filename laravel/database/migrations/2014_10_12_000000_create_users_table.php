@@ -20,7 +20,14 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('phone', 13)->nullable();
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->enum('role', ['admin', 'employee'])->default('employee');
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');
         });
     }
 

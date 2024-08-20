@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('offer_forms', function (Blueprint $table) {
             $table->id();
             $table->string('offers');
-            $table->int('client_id');
-            $table->int('company_id');
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('company_id');
             $table->boolean('is_deleted');
             $table->timestamps();
 

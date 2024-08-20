@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->int('user_id');
-            $table->int('product_id');
-            $table->int('old_quantity');
-            $table->int('new_quantity');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('old_quantity');
+            $table->integer('new_quantity');
             $table->enum('type',['incoming','outcoming']);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');

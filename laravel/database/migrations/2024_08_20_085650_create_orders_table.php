@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->int('prepared_by');
-            $table->int('factory_id');
+            $table->unsignedBigInteger('prepared_by');
+            $table->unsignedBigInteger('factory_id');
             $table->string('contact_person');
-            $table->int('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->float('quantity');
             $table->string('length');
             $table->date('due_date');
             $table->boolean('is_draft')->default(true);
             $table->boolean('is_form')->default(false);
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('prepared_by')->references('id')->on('users')->onDelete('restrict');

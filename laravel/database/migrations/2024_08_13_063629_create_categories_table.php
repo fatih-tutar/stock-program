@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('type',['main','sub']);
-            $table->int('parent_id');
+            $table->integer('parent_id');
             $table->string('image');
             $table->string('columns');
-            $table->int('profit_percentage');
-            $table->int('company_id');
+            $table->integer('profit_percentage');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');

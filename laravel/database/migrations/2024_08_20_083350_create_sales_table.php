@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->string('products');
-            $table->int('client_id');
+            $table->unsignedBigInteger('client_id');
             $table->string('quantities');
             $table->string('prices');
-            $table->int('created_by');
-            $table->int('prepared_by');
-            $table->int('invoiced_by');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('prepared_by');
+            $table->unsignedBigInteger('invoiced_by');
             $table->enum('delivery_method',['store','depot','local','warehouse']);
             $table->text('description');
             $table->enum('status',['received','preparing','invoiced','archived']);
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
 
             $table->timestamps();
 

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('customer_name');
             $table->string('mold_number');
-            $table->int('factory_id');
+            $table->integer('factory_id');
             $table->string('pdf');
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 

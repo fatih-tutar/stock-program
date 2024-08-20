@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('warehouse_incoming')->nullable();
             $table->float('warehouse_outgoing')->nullable();
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');

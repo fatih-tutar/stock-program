@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('technical_drawing');
             $table->string('product_image');
             $table->text('description')->nullable();
-            $table->int('order');
+            $table->integer('order');
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');

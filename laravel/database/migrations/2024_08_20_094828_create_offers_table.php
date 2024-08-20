@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->int('product_id');
-            $table->int('client_id');
-            $table->int('quantity');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('client_id');
+            $table->integer('quantity');
             $table->float('price');
             $table->boolean('is_form')->default(false);
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');

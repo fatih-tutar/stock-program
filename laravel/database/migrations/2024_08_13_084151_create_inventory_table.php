@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventory', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->string('code');
             $table->string('diameter');
             $table->string('width');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('mass');
             $table->string('factory');
             $table->boolean('is_deleted')->default(false);
-            $table->int('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');
