@@ -27,6 +27,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'company_id',
+        'role',
+        'is_active',
+        'is_deleted'
     ];
 
     /**
@@ -58,4 +63,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
