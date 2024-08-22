@@ -44,11 +44,18 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'sub_category');
     }
 
-    public function factory() {
+    public function factory()
+    {
         return $this->belongsTo(Factory::class);
     }
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(Company::class);
+    }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
     }
 }
