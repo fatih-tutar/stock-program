@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Company;
+use App\Models\DailyMovement;
 use App\Models\Factory;
 use App\Models\Inventory;
 use App\Models\Price;
@@ -153,22 +154,41 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        $fiyatlar = DB::table('fiyatlar')->get();
+        // $fiyatlar = DB::table('fiyatlar')->get();
 
-        foreach($fiyatlar as $fiyat) {
-            Price::create([
-                'product_no' => $fiyat->urunno,
-                'code' => $fiyat->kod,
-                'model' => $fiyat->model,
-                'amount' => $fiyat->adetmetre,
-                'price' => $fiyat->fiyat,
-                'technical_drawing' => $fiyat->resim1,
-                'product_image' => $fiyat->resim2,
-                'description' => $fiyat->aciklama,
-                'order' => $fiyat->sira,
-                'is_deleted' => $fiyat->silik,
-                'company_id' => 2
-            ]);
+        // foreach($fiyatlar as $fiyat) {
+        //     Price::create([
+        //         'product_no' => $fiyat->urunno,
+        //         'code' => $fiyat->kod,
+        //         'model' => $fiyat->model,
+        //         'amount' => $fiyat->adetmetre,
+        //         'price' => $fiyat->fiyat,
+        //         'technical_drawing' => $fiyat->resim1,
+        //         'product_image' => $fiyat->resim2,
+        //         'description' => $fiyat->aciklama,
+        //         'order' => $fiyat->sira,
+        //         'is_deleted' => $fiyat->silik,
+        //         'company_id' => 2
+        //     ]);
+        // }
+
+        // $gelengidenler = DB::table('gelengiden')->get();
+
+        // foreach($gelengidenler as $gelengiden) {
+        //     DailyMovement::create([
+        //         'store_incoming' => $gelengiden->gelen,
+        //         'store_outgoing' => $gelengiden->giden,
+        //         'warehouse_incoming' => $gelengiden->alkop_gelen,
+        //         'warehouse_outgoing' => $gelengiden->alkop_giden,
+        //         'is_deleted' => $gelengiden->silik,
+        //         'company_id' => 2
+        //     ]);
+        // }
+
+        $islemler = DB::table('islemler')->get();
+
+        foreach($islemler as $islem) {
+            
         }
     }
 }
