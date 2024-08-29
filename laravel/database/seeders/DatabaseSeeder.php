@@ -10,8 +10,12 @@ use App\Models\Company;
 use App\Models\DailyMovement;
 use App\Models\Factory;
 use App\Models\Inventory;
+use App\Models\Mold;
+use App\Models\MoldList;
 use App\Models\Price;
 use App\Models\Product;
+use App\Models\Sale;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -30,6 +34,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $oldCategoryIds = [1,2,3,4,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,41,42,43,44,45,46,47,48,49,50,55,56,57,66,67,69,70,71,79,91,96];
+        $newCategoryIds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
+
+        $oldUserIds = [1,2,9,12,14,16,18,20,21,23,25,32,33,51,52,53,54,55];
+        $newUserIds = [7,8,10,13,9,12,14,15,11,16,17,19,20,24,23,18,21,22];
+
+        $oldFactoryIds = [2,3,4,5,6,14,16,17,18,19,20,22,23,24,25,27,30,31,32,34,36,37,38,39,40,41];
+        $newFactoryIds = [1,2,3,4,5,8,7,9,6,10,11,14,15,16,17,18,19,20,21,23,22,12,13,24,25,26];
 
         // $sirketler = DB::table('sirketler')->get();
 
@@ -53,8 +66,18 @@ class DatabaseSeeder extends Seeder
         //         'phone' => $uye->uye_tel,
         //         'company_id' => $uye->uye_firma,
         //         'role' => $uye->uye_tipi == 2 ? 'admin' : 'employee',
+        //         'permissions' => $uye->yetkiler,
         //         'is_active' => $uye->pasiflik,
         //         'is_deleted' => $uye->uye_silik
+        //     ]);
+        // }
+
+        // $uyeler = DB::table('uyeler')->get();
+
+        // foreach($uyeler as $uye) {
+        //     $id = $newUserIds[array_search($uye->uye_id, $oldUserIds)];
+        //     User::where('id',$id)->update([
+        //         'permissions' => $uye->uye_yetkiler
         //     ]);
         // }
 
@@ -89,10 +112,6 @@ class DatabaseSeeder extends Seeder
 
         // $urunler = DB::table('urun')->get();
 
-        // $oldCategoryIds = [1,2,3,4,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,41,42,43,44,45,46,47,48,49,50,55,56,57,66,67,69,70,71,79,91,96];
-        // $newCategoryIds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
-        // $oldFactoryIds = [2,3,4,5,6,14,16,17,18,19,20,22,23,24,25,27,30,31,32,34,36,37,38,39,40,41];
-        // $newFactoryIds = [1,2,3,4,5,8,7,9,6,10,11,14,15,16,17,18,19,20,21,23,22,12,13,24,25,26];
         // foreach($urunler as $urun) {
         //     Product::create([
         //         'main_category' => $newCategoryIds[array_search($urun->kategori_bir, $oldCategoryIds)],
@@ -185,10 +204,87 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        $islemler = DB::table('islemler')->get();
+        // $islemler = DB::table('islemler')->get();
 
-        foreach($islemler as $islem) {
-            
+        // foreach($islemler as $islem) {
+        //     $product = DB::table('products')->where('code', $islem->urunid)->first();
+        //     if($product) {
+        //         Transaction::create([
+        //             'user_id' => $newUserIds[array_search($islem->yapanid, $oldUserIds)],
+        //             'product_id' => $product->id,
+        //             'old_quantity' => $islem->eskiadet,
+        //             'new_quantity' => $islem->yeniadet,
+        //             'type' => $islem->islem_tipi == 0 ? 'incoming' : 'outcoming',
+        //             'company_id' => 2
+        //         ]);
+        //     }
+        // }
+
+        // $kaliplar = DB::table('kaliplar')->get();
+
+        // foreach($kaliplar as $kalip) {
+        //     Mold::create([
+        //         'customer_name' => $kalip->musteriadi,
+        //         'mold_number' => $kalip->kalipnumarasi,
+        //         'factory_id' => $newFactoryIds[array_search($kalip->fabrikaid, $oldFactoryIds)],
+        //         'pdf' => $kalip->pdf,
+        //         'company_id' => 2
+        //     ]);
+        // }
+
+        // $kaliplistesi = DB::table('kalip_listesi')->get();
+
+        // foreach($kaliplistesi as $kalip) {
+        // $moldListStatuses = ['normal', 'deleted', 'archived_add', 'arciheved_remove'];
+        //     MoldList::create([
+        //         'customer' => $kalip->musteri,
+        //         'contact_person' => $kalip->ilgilikisi,
+        //         'product_info' => $kalip->urunmiktar,
+        //         'price' => $kalip->fiyat,
+        //         'factory' => $kalip->fabrika,
+        //         'factory_price' => $kalip->fabrikafiyat,
+        //         'user_id' => $newUserIds[array_search($kalip->teklifveren, $oldUserIds)],
+        //         'description' => $kalip->aciklama,
+        //         'status' => $moldListStatuses[$kalip->silik],
+        //         'company_id' => 2
+        //     ]);
+        // }
+
+        $sevkiyatlar = DB::table('sevkiyat')->get();
+
+        foreach($sevkiyatlar as $sevkiyat) {
+
+            $firma = DB::table('firmalar')->where('firmaid',$sevkiyat->firma_id)->first();
+
+            if($firma) {
+
+                $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
+
+                $deliveryMethods = ['store', 'depot', 'local', 'warehouse'];
+
+                $statuses = ['received', 'preparing', 'invoiced', 'archived'];
+
+                if(empty($sevkiyat->sevk_tipi)) $sevkiyat->sevk_tipi = 0;
+
+                if(in_array($sevkiyat->olusturan,$oldCategoryIds) && in_array($sevkiyat->hazirlayan,$oldCategoryIds) & in_array($sevkiyat->faturaci,$oldCategoryIds)) {
+
+                    Sale::create([
+                        'products' => $sevkiyat->urunler,
+                        'client_id' => $client->id,
+                        'quantities' => $sevkiyat->adetler,
+                        'weights' => $sevkiyat->kilolar,
+                        'prices' => $sevkiyat->fiyatlar,
+                        'created_by' => $newUserIds[array_search($sevkiyat->olusturan,$oldCategoryIds)],
+                        'prepared_by' => $newUserIds[array_search($sevkiyat->hazirlayan,$oldCategoryIds)],
+                        'invoiced_by' => $newUserIds[array_search($sevkiyat->faturaci,$oldCategoryIds)],
+                        'delivery_method' => $deliveryMethods[$sevkiyat->sevk_tipi],
+                        'description' => $sevkiyat->aciklama,
+                        'status' => $statuses[$sevkiyat->durum],
+                        'is_deleted' => $sevkiyat->silik,
+                        'company_id' => 2
+                    ]);
+                }
+            }
         }
     }
 }

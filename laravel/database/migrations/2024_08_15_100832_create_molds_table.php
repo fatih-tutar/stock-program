@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('customer_name');
             $table->string('mold_number');
-            $table->integer('factory_id');
+            $table->unsignedBigInteger('factory_id');
             $table->string('pdf');
             $table->unsignedBigInteger('company_id');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');
+            $table->foreign('factory_id')->references('id')->on('factories')->onDelete('restrict');
         });
     }
 

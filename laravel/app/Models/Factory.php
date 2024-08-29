@@ -29,4 +29,9 @@ class Factory extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function molds()
+    {
+        return $this->hasMany(Mold::class);
+    }
 }

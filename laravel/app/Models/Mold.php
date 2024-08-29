@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Mold extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'address',
-        'amount_due',
-        'due_date',
-        'company_id'
+        'customer_name',
+        'mold_number',
+        'factory_id',
+        'pdf',
+        'company_id',
+        'is_deleted'
     ];
 
     public function company()
@@ -24,8 +23,8 @@ class Client extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function sales()
+    public function factory()
     {
-        return $this->hasMany(Sale::class);
+        return $this->belongsTo(Factory::class);
     }
 }
