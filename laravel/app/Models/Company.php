@@ -67,7 +67,7 @@ class Company extends Model
         return $this->hasMany(Mold::class);
     }
 
-    public function moldlist()
+    public function moldList()
     {
         return $this->hasMany(MoldList::class);
     }
@@ -75,5 +75,25 @@ class Company extends Model
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function orderForms()
+    {
+        return $this->hasMany(OrderForm::class);
+    }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
+    public function offerForms()
+    {
+        return $this->hasMany(OfferForm::class);
     }
 }

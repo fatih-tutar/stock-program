@@ -12,6 +12,10 @@ use App\Models\Factory;
 use App\Models\Inventory;
 use App\Models\Mold;
 use App\Models\MoldList;
+use App\Models\Offer;
+use App\Models\OfferForm;
+use App\Models\Order;
+use App\Models\OrderForm;
 use App\Models\Price;
 use App\Models\Product;
 use App\Models\Sale;
@@ -45,7 +49,6 @@ class DatabaseSeeder extends Seeder
         $newFactoryIds = [1,2,3,4,5,8,7,9,6,10,11,14,15,16,17,18,19,20,21,23,22,12,13,24,25,26];
 
         // $sirketler = DB::table('sirketler')->get();
-
         // foreach($sirketler as $sirket) {
         //     Company::create([
         //         'name' => $sirket->sirketadi,
@@ -57,7 +60,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $uyeler = DB::table('uyeler')->get();
-
         // foreach($uyeler as $uye) {
         //     User::create([
         //         'name' => $uye->uye_adi,
@@ -73,7 +75,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $uyeler = DB::table('uyeler')->get();
-
         // foreach($uyeler as $uye) {
         //     $id = $newUserIds[array_search($uye->uye_id, $oldUserIds)];
         //     User::where('id',$id)->update([
@@ -82,7 +83,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $fabrikalar = DB::table('fabrikalar')->get();
-
         // foreach($fabrikalar as $fabrika) {
         //     Factory::create([
         //         'name' => $fabrika->fabrika_adi,
@@ -97,7 +97,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $kategoriler = DB::table('kategori')->get();
-
         // foreach($kategoriler as $kategori) {
         //     Category::create([
         //         'name' => $kategori->kategori_adi,
@@ -111,7 +110,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $urunler = DB::table('urun')->get();
-
         // foreach($urunler as $urun) {
         //     Product::create([
         //         'main_category' => $newCategoryIds[array_search($urun->kategori_bir, $oldCategoryIds)],
@@ -140,10 +138,8 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $envanterler = DB::table('envanter')->get();
-
         // foreach($envanterler as $envanter) {
         //     $product = DB::table('products')->where('code', $envanter->urun_id)->first();
-
         //     if ($product) {
         //         Inventory::create([
         //             'product_id' => $product->id,
@@ -160,7 +156,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $firmalar = DB::table('firmalar')->get();
-
         // foreach($firmalar as $firma) {
         //     Client::create([
         //         'name' => $firma->firmaadi,
@@ -174,7 +169,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $fiyatlar = DB::table('fiyatlar')->get();
-
         // foreach($fiyatlar as $fiyat) {
         //     Price::create([
         //         'product_no' => $fiyat->urunno,
@@ -192,7 +186,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $gelengidenler = DB::table('gelengiden')->get();
-
         // foreach($gelengidenler as $gelengiden) {
         //     DailyMovement::create([
         //         'store_incoming' => $gelengiden->gelen,
@@ -205,7 +198,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $islemler = DB::table('islemler')->get();
-
         // foreach($islemler as $islem) {
         //     $product = DB::table('products')->where('code', $islem->urunid)->first();
         //     if($product) {
@@ -221,7 +213,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $kaliplar = DB::table('kaliplar')->get();
-
         // foreach($kaliplar as $kalip) {
         //     Mold::create([
         //         'customer_name' => $kalip->musteriadi,
@@ -233,7 +224,6 @@ class DatabaseSeeder extends Seeder
         // }
 
         // $kaliplistesi = DB::table('kalip_listesi')->get();
-
         // foreach($kaliplistesi as $kalip) {
         // $moldListStatuses = ['normal', 'deleted', 'archived_add', 'arciheved_remove'];
         //     MoldList::create([
@@ -250,40 +240,124 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        $sevkiyatlar = DB::table('sevkiyat')->get();
+        // $sevkiyatlar = DB::table('sevkiyat')->get();
+        // foreach($sevkiyatlar as $sevkiyat) {
+        //     $firma = DB::table('firmalar')->where('firmaid',$sevkiyat->firma_id)->first();
+        //     if($firma) {
+        //         $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
+        //         $deliveryMethods = ['store', 'depot', 'local', 'warehouse'];
+        //         $statuses = ['received', 'preparing', 'invoiced', 'archived'];
+        //         if(empty($sevkiyat->sevk_tipi)) $sevkiyat->sevk_tipi = 0;
+        //         if(in_array($sevkiyat->olusturan,$oldCategoryIds) && in_array($sevkiyat->hazirlayan,$oldCategoryIds) & in_array($sevkiyat->faturaci,$oldCategoryIds)) {
+        //             $productIdsArray = explode(",", $sevkiyat->urunler);
+        //             $productIds = '';
+        //             foreach($productIdsArray as $item) {
+        //                 $newProductId = DB::table('products')->where('code', $item)->first()->id;
+        //                 $productIds = empty($productIds) ? $newProductId : $productIds.",".$newProductId;
+        //             }
+        //             Sale::create([
+        //                 'products' => $productIds,
+        //                 'client_id' => $client->id,
+        //                 'quantities' => $sevkiyat->adetler,
+        //                 'weights' => $sevkiyat->kilolar,
+        //                 'prices' => $sevkiyat->fiyatlar,
+        //                 'created_by' => $newUserIds[array_search($sevkiyat->olusturan,$oldCategoryIds)],
+        //                 'prepared_by' => $newUserIds[array_search($sevkiyat->hazirlayan,$oldCategoryIds)],
+        //                 'invoiced_by' => $newUserIds[array_search($sevkiyat->faturaci,$oldCategoryIds)],
+        //                 'delivery_method' => $deliveryMethods[$sevkiyat->sevk_tipi],
+        //                 'description' => $sevkiyat->aciklama,
+        //                 'status' => $statuses[$sevkiyat->durum],
+        //                 'is_deleted' => $sevkiyat->silik,
+        //                 'company_id' => 2
+        //             ]);
+        //         }
+        //     }
+        // }
 
-        foreach($sevkiyatlar as $sevkiyat) {
+        // $siparisler = DB::table('siparis')->get();
+        // foreach($siparisler as $siparis) {
+        //     $termin = $siparis->terminsaniye;
+        //     $dueDate = Carbon::createFromTimestamp($termin)->format('Y-m-d');
+        //     $preparedBy = DB::table('users')->where('name', $siparis->hazirlayankisi)->first();
+        //     $product = DB::table('products')->where('code', $siparis->urun_id)->first();
+        //     if($preparedBy && $product){
+        //         Order::create([
+        //             'prepared_by' => $preparedBy->id,
+        //             'factory_id' => $newFactoryIds[array_search($siparis->urun_fabrika_id, $oldFactoryIds)],
+        //             'contact_person' => $siparis->ilgilikisi,
+        //             'product_id' => $product->id,
+        //             'quantity' => $siparis->urun_siparis_aded,
+        //             'length' => $siparis->siparisboy,
+        //             'due_date' => $dueDate,
+        //             'is_draft' => $siparis->taslak,
+        //             'is_form' => $siparis->formda,
+        //             'is_deleted' => $siparis->silik,
+        //             'company_id' => 2,
+        //              'oldId' => $siparis->siparis_id
+        //         ]);
+        //     }
+        // }
 
-            $firma = DB::table('firmalar')->where('firmaid',$sevkiyat->firma_id)->first();
+        // $siparisFormlari = DB::table('siparisformlari')->get();
+        // foreach($siparisFormlari as $siparisFormu) {
+        //     $orderIdsArray = explode(",", $siparisFormu->siparisler);
+        //     $orderIds = '';
+        //     foreach($orderIdsArray as $item) {
+        //         $newOrder = DB::table('orders')->where('oldId', $item)->first();
+        //         if($newOrder){
+        //             $newOrderId = $newOrder->id;
+        //             $orderIds = empty($orderIds) ? $newOrderId : $orderIds.",".$newOrderId;
+        //         }
+        //     }
+        //     OrderForm::create([
+        //         'orders' => $orderIds,
+        //         'factory_id' => $newFactoryIds[array_search($siparisFormu->fabrikaid, $oldFactoryIds)],
+        //         'company_id' => 2,
+        //         'is_deleted' => $siparisFormu->silik
+        //     ]);
+        // }
 
-            if($firma) {
+        // $teklifler = DB::table('teklif')->get();
+        // foreach($teklifler as $teklif) {
+        //     $product = DB::table('products')->where('code', $teklif->turunid)->first();
+        //     $firma = DB::table('firmalar')->where('firmaid',$teklif->tverilenfirma)->first();
+        //     if($firma) {
+        //         $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
+        //         if($product) {
+        //             Offer::create([
+        //                 'product_id' => $product->id,
+        //                 'client_id' => $client->id,
+        //                 'quantity' => $teklif->tadet,
+        //                 'price' => $teklif->tsatisfiyati,
+        //                 'is_form' => $teklif->formda,
+        //                 'is_deleted' => $teklif->silik,
+        //                 'company_id' => 2,
+        //                 'old_id' => $teklif->teklifid
+        //             ]);
+        //         }
+        //     }
+        // }
 
-                $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
-
-                $deliveryMethods = ['store', 'depot', 'local', 'warehouse'];
-
-                $statuses = ['received', 'preparing', 'invoiced', 'archived'];
-
-                if(empty($sevkiyat->sevk_tipi)) $sevkiyat->sevk_tipi = 0;
-
-                if(in_array($sevkiyat->olusturan,$oldCategoryIds) && in_array($sevkiyat->hazirlayan,$oldCategoryIds) & in_array($sevkiyat->faturaci,$oldCategoryIds)) {
-
-                    Sale::create([
-                        'products' => $sevkiyat->urunler,
-                        'client_id' => $client->id,
-                        'quantities' => $sevkiyat->adetler,
-                        'weights' => $sevkiyat->kilolar,
-                        'prices' => $sevkiyat->fiyatlar,
-                        'created_by' => $newUserIds[array_search($sevkiyat->olusturan,$oldCategoryIds)],
-                        'prepared_by' => $newUserIds[array_search($sevkiyat->hazirlayan,$oldCategoryIds)],
-                        'invoiced_by' => $newUserIds[array_search($sevkiyat->faturaci,$oldCategoryIds)],
-                        'delivery_method' => $deliveryMethods[$sevkiyat->sevk_tipi],
-                        'description' => $sevkiyat->aciklama,
-                        'status' => $statuses[$sevkiyat->durum],
-                        'is_deleted' => $sevkiyat->silik,
-                        'company_id' => 2
-                    ]);
+        $teklifFormlari = DB::table('teklifformlari')->get();
+        foreach($teklifFormlari as $teklifFormu) {
+            $offerIdsArray = explode(",", $teklifFormu->tekliflistesi);
+            $offerIds = '';
+            foreach($offerIdsArray as $item) {
+                $newOffer = DB::table('offers')->where('old_id', $item)->first();
+                if($newOffer){
+                    $newOfferId = $newOffer->id;
+                    $offerIds = empty($offerIds) ? $newOfferId : $offerIds.",".$newOfferId;
                 }
+            }
+            $firma = DB::table('firmalar')->where('firmaid',$teklifFormu->firmaid)->first();
+            if($firma) {
+                $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
+                OfferForm::create([
+                    'offers' => $offerIds,
+                    'client_id' => $client->id,
+                    'company_id' => 2,
+                    'is_deleted' => $teklifFormu->silik
+                ]);
             }
         }
     }

@@ -28,4 +28,14 @@ class Client extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
+    public function offerForms()
+    {
+        return $this->hasMany(OfferForm::class);
+    }
 }

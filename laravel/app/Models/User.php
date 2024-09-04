@@ -74,7 +74,7 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    public function moldlist()
+    public function moldList()
     {
         return $this->hasMany(MoldList::class);
     }
@@ -82,5 +82,10 @@ class User extends Authenticatable
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
