@@ -338,27 +338,27 @@ class DatabaseSeeder extends Seeder
         //     }
         // }
 
-        $teklifFormlari = DB::table('teklifformlari')->get();
-        foreach($teklifFormlari as $teklifFormu) {
-            $offerIdsArray = explode(",", $teklifFormu->tekliflistesi);
-            $offerIds = '';
-            foreach($offerIdsArray as $item) {
-                $newOffer = DB::table('offers')->where('old_id', $item)->first();
-                if($newOffer){
-                    $newOfferId = $newOffer->id;
-                    $offerIds = empty($offerIds) ? $newOfferId : $offerIds.",".$newOfferId;
-                }
-            }
-            $firma = DB::table('firmalar')->where('firmaid',$teklifFormu->firmaid)->first();
-            if($firma) {
-                $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
-                OfferForm::create([
-                    'offers' => $offerIds,
-                    'client_id' => $client->id,
-                    'company_id' => 2,
-                    'is_deleted' => $teklifFormu->silik
-                ]);
-            }
-        }
+        // $teklifFormlari = DB::table('teklifformlari')->get();
+        // foreach($teklifFormlari as $teklifFormu) {
+        //     $offerIdsArray = explode(",", $teklifFormu->tekliflistesi);
+        //     $offerIds = '';
+        //     foreach($offerIdsArray as $item) {
+        //         $newOffer = DB::table('offers')->where('old_id', $item)->first();
+        //         if($newOffer){
+        //             $newOfferId = $newOffer->id;
+        //             $offerIds = empty($offerIds) ? $newOfferId : $offerIds.",".$newOfferId;
+        //         }
+        //     }
+        //     $firma = DB::table('firmalar')->where('firmaid',$teklifFormu->firmaid)->first();
+        //     if($firma) {
+        //         $client = DB::table('clients')->where('name',$firma->firmaadi)->first();
+        //         OfferForm::create([
+        //             'offers' => $offerIds,
+        //             'client_id' => $client->id,
+        //             'company_id' => 2,
+        //             'is_deleted' => $teklifFormu->silik
+        //         ]);
+        //     }
+        // }
     }
 }
