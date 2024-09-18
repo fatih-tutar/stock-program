@@ -26,4 +26,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/home', function () {
+        return view('home'); // home.blade.php'ye yönlendirilir
+    })->name('home');
 });

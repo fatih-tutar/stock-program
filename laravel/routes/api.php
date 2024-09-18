@@ -19,7 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('api')->group(function () {
-    //Route::get('/categories', \App\Http\Controllers\Category\IndexController::class);
-    Route::get('/categories', [CategoryController::class, 'index']);
-});
+Route::get('/categories', \App\Http\Controllers\Category\IndexController::class);
