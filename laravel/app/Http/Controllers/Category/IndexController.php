@@ -9,6 +9,7 @@ use App\Http\Requests\Category\IndexRequest;
 class IndexController extends Controller
 {
     public function __invoke(IndexRequest $request, CategoryManager $categoryManager){
+        
         $result = $categoryManager->getCategories(
             $request->all()
         );

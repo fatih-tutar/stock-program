@@ -16,9 +16,18 @@ class CategoryManager
 
     public function getCategories(array $query = null)
     {
-        $categories = Category::all();
-        return response()->json($categories);
+        $type = $query['type'] ?? null;
+
+        $categories = Category::query();
+
+        if ($type) {
+            $categories->where('type', $type);
+        }
+
+        $result = $categories->get();
+
+        return response()->json($result);
     }
 
-    
+
 }

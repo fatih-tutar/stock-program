@@ -5,8 +5,6 @@
         </h2>
     </x-slot>
 
-    <h1>Kategoriler</h1>
-
     <ul id="category-list">
         <!-- Kategoriler burada listelenecek -->
     </ul>
@@ -14,7 +12,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Axios ile API'ye istek yapılıyor
-            axios.get('/api/categories')
+            axios.get('/api/categories?type=main')
                 .then(function (response) {
                     // API'den dönen kategoriler alınıyor
                     const categories = response.data;
